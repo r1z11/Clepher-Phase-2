@@ -19,13 +19,21 @@ function Capture() {
 
     const [bot, setBot] = useState<Bot>();
     const [query, setQuery] = useState('');
+    const [checkedItems, setCheckedItems] = useState(new Array(links.length).fill(false));
 
     useEffect(() => {
         const _bot = bots.filter(item => item.id === Number(botId));
         setBot(_bot[0]);
     }, []);
 
-    const headers = ["Message Name", "M.ME Link"];
+    // Handle toggling checkboxes
+    const handleCheckbox = (index: number) => {
+        const updatedCheckedItems = [...checkedItems];
+        updatedCheckedItems[index] = !checkedItems[index];
+        setCheckedItems(updatedCheckedItems);
+    }
+
+    const headers = ["", "Message Name", "M.ME Link"];
 
     return (
         <div className="flex flex-col min-h-screen bg-blue-50">
@@ -38,8 +46,8 @@ function Capture() {
                     <div className="flex flex-col rounded-xl p-3 bg-white w-1/5 max-h-72">
                         <p className="text-sm text-gray-300 font-bold ml-3">Capture tools</p>
 
-                        <div className="flex flex-row items-center mt-1 bg-sky-950 p-2 rounded-lg">
-                            <IoIosLink size={18} color="#fff" />
+                        <div className="flex flex-row items-center mt-3 bg-sky-950 p-2 rounded-lg">
+                            <IoIosLink size={18} color="#FFF" />
                             <Link className="text-gray-500 ml-3 text-sm text-white" to={'#'}>Links Library</Link>
                         </div>
 
@@ -99,6 +107,9 @@ function Capture() {
                                 <tbody>
                                     {links.map((row) => (
                                         <tr key={row.id} className="text-gray-500 text-left text-sm border-bottom border-gray-300">
+                                        <td key={`check-${row.id}`} className="pl-4 py-4">
+                                            <input type="checkbox" checked={checkedItems[row.id]} onChange={(e) => handleCheckbox(row.id)} className="border border-gray-300 rounded-full" />
+                                        </td>
                                             <td key={`msg-${row.id}`} className="pl-4 py-4">
                                                 {row.message}
                                             </td>

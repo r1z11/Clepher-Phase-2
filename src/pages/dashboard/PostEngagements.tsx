@@ -93,6 +93,7 @@ function PostEngagements() {
 
     // Delete single post engagements
     const deleteEngagement = (key: string) => {
+        console.log('delete post engagement', key);
         if (engagements && key == '3') {
             const items = [...engagements];
             for (let i = 0; i < engagements.length; i++) {
@@ -118,9 +119,9 @@ function PostEngagements() {
                     <div className="flex flex-col rounded-xl p-3 bg-white w-1/5 max-h-72">
                         <p className="text-sm text-gray-300 font-bold ml-3">Capture tools</p>
 
-                        <div className="flex flex-row items-center mt-1 p-2 rounded-lg">
-                            <IoIosLink size={18} color="#fff" />
-                            <Link className="text-gray-500 ml-3 text-sm text-white" to={'#'}>Links Library</Link>
+                        <div className="flex flex-row items-center mt-1 p-2 rounded-lg hover:bg-gray-200">
+                            <IoIosLink size={18} color="#394e6a" />
+                            <Link className="text-gray-500 ml-3 text-sm" to={`/dashboard/capture/${botId}`}>Links Library</Link>
                         </div>
 
                         <div className="flex flex-row items-center mt-1 hover:bg-gray-200 p-2 rounded-lg">
@@ -138,7 +139,7 @@ function PostEngagements() {
                             <Link className="text-gray-500 ml-3 text-sm" to={'#'}>Messenger Code</Link>
                         </div>
 
-                        <div className="flex flex-row items-center mt-1 bg-sky-950 hover:bg-gray-200 p-2 rounded-lg">
+                        <div className="flex flex-row items-center mt-1 bg-sky-950 p-2 rounded-lg">
                             <MdOutlinePostAdd size={18} color="#fff" />
                             <Link className="text-white ml-3 text-sm" to={'#'}>Post Engagements</Link>
                         </div>
@@ -179,8 +180,8 @@ function PostEngagements() {
                             <table className="table-auto w-full rounded-xl bg-white">
                                 <thead>
                                     <tr className="text-gray-500 text-left text-sm">
-                                        {headers.map((header) => (
-                                            <th key={`header-${header}`} className="px-3 py-2 border-bottom border-gray-300">
+                                        {headers.map((header, index) => (
+                                            <th key={`header-${index}`} className="px-3 py-2 border-bottom border-gray-300">
                                                 {header}
                                             </th>
                                         ))}
@@ -190,7 +191,7 @@ function PostEngagements() {
                                     {engagements && engagements.map((row, index) => (
                                         <tr key={`row-${index}`} className="text-gray-500 text-left text-sm border-bottom border-gray-300 pl-4 py-4">
                                             <td key={`check-${row.id}`} className="pl-4 py-4">
-                                                <input type="checkbox" checked={checkedItems[row.id]} onChange={(e) => handleCheckbox(row.id)} className="border border-gray-300 rounded-full" />
+                                                <input type="checkbox" checked={checkedItems[index]} onChange={(e) => handleCheckbox(index)} className="border border-gray-300 rounded-full" />
                                             </td>
                                             <td key={`icon-${row.eu}`} className="pl-4 py-4">
                                                 {row.icon == 'instagram' ?
@@ -209,9 +210,9 @@ function PostEngagements() {
                                                 {row.conversion}
                                             </td>
                                             <td key={`action-${index}`} className="pl-4 py-4">
-                                                <button key={`btn-${index}`} className="border border-sky-950 bg-white px-2 py-1 rounded-lg text-xs text-sky-950 hover:bg-sky-950 hover:text-white font-bold" onClick={() => handleActions(postActionOpenItems[index])}>Actions</button>
+                                                <button key={`btn-${index}`} className="border border-sky-950 bg-white px-2 py-1 rounded-lg text-xs text-sky-950 hover:bg-sky-950 hover:text-white font-bold" onClick={() => handleActions(index)}>Actions</button>
 
-                                                {postActionOpenItems[index] && <DropDownMenu key={`menu-${index}`} botId={Number(botId)} options={postOptions} width="w-30" action={() => {}}/>}
+                                                {postActionOpenItems[index] && <DropDownMenu key={`menu-${index}`} botId={Number(botId)} options={postOptions} width="w-30" action={() => deleteEngagement}/>}
                                             </td>
                                         </tr>
                                     ))}
