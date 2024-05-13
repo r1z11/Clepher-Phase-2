@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -8,14 +7,12 @@ interface Props {
         label: string;
     }[]
     width: string;
-    action?: () => void;
+    action?: (key: string) => void;
 }
 
 function DropdownMenu({ botId, options, width, action }: Props) {
-    
-    const navigate = useNavigate();
 
-    const [selection, setSelection] = useState('');
+    const navigate = useNavigate();
 
     return (
         <div key={botId} className="relative inline-block">
@@ -26,8 +23,7 @@ function DropdownMenu({ botId, options, width, action }: Props) {
                         className="text-sm text-gray-600 hover:bg-gray-100 hover:rounded-lg px-2 py-1 cursor-pointer w-full text-left"
                         onClick={() => {
                             option.label == 'Dashboard' && navigate(`/dashboard/${botId}`);
-                            action && action();
-                            setSelection(option.key);
+                            action && action(option.key);
                         }}
                     >
                         {option.label}

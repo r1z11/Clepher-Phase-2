@@ -51,6 +51,7 @@ function PostEngagements() {
     const [postActionOpenItems, setPostActionOpenItems] = useState(new Array(postEngagements.length).fill(false));
     const [checkedItems, setCheckedItems] = useState(new Array(postEngagements.length).fill(false));
     const [engagements, setEngagements] = useState<{ id: number; icon: string; name: string; eu: { engaged: number; unique: number; }; acquired: number; conversion: string; }[]>()
+    const [index, setIndex] = useState(0);
 
     // Get bot details
     useEffect(() => {
@@ -69,11 +70,11 @@ function PostEngagements() {
 
     // Handle toggling dropdown menus
     const handleActions = (index: number) => {
-        console.log('index', index)
+        // Update selected item
+        setIndex(index);
+
         const updatedPostActionOpenItems = [...postActionOpenItems];
-        console.log('updated items', updatedPostActionOpenItems)
         updatedPostActionOpenItems[index] = !postActionOpenItems[index];
-        console.log('updated item', updatedPostActionOpenItems[index])
         setPostActionOpenItems(updatedPostActionOpenItems);
     }
 
@@ -88,19 +89,22 @@ function PostEngagements() {
             }
             setEngagements(items);
         }
-        console.log('delete es', engagements)
     }
 
-    // Delete single post engagements
-    const deleteEngagement = (key: string) => {
-        console.log('delete post engagement', key);
+    // Single post engagement actions
+    const applyAction = (key: string) => {
+        // Edit post engagement
+        if (engagements && key == '1') {
+            // edit
+        }
+        // Rename post engagement
+        if (engagements && key == '2') {
+            // rename
+        }
+        // Delete post engagement
         if (engagements && key == '3') {
             const items = [...engagements];
-            for (let i = 0; i < engagements.length; i++) {
-                if (postActionOpenItems[i]) {
-                    items.splice(i, 1);
-                }
-            }
+            items.splice(index, 1);
             setEngagements(items);
         }
     }
@@ -212,7 +216,7 @@ function PostEngagements() {
                                             <td key={`action-${index}`} className="pl-4 py-4">
                                                 <button key={`btn-${index}`} className="border border-sky-950 bg-white px-2 py-1 rounded-lg text-xs text-sky-950 hover:bg-sky-950 hover:text-white font-bold" onClick={() => handleActions(index)}>Actions</button>
 
-                                                {postActionOpenItems[index] && <DropDownMenu key={`menu-${index}`} botId={Number(botId)} options={postOptions} width="w-30" action={() => deleteEngagement}/>}
+                                                {postActionOpenItems[index] && <DropDownMenu key={`menu-${index}`} botId={Number(botId)} options={postOptions} width="w-30" action={applyAction} />}
                                             </td>
                                         </tr>
                                     ))}
