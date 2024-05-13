@@ -32,13 +32,13 @@ function Capture() {
             {bot && <HeaderDash companyName={bot.companyName} />}
 
             <div className="flex h-full w-full flex-row">
-                <Sidebar botId={botId ? botId : '4'} />
+                <Sidebar botId={botId ? botId : '4'} page="capture" />
 
                 <div className="flex flex-row p-6 w-full h-full">
                     <div className="flex flex-col rounded-xl p-3 bg-white w-1/5 max-h-72">
                         <p className="text-sm text-gray-300 font-bold ml-3">Capture tools</p>
 
-                        <div className="flex flex-row items-center mt-3 bg-gray-950 p-2 rounded-lg">
+                        <div className="flex flex-row items-center mt-1 bg-sky-950 p-2 rounded-lg">
                             <IoIosLink size={18} color="#fff" />
                             <Link className="text-gray-500 ml-3 text-sm text-white" to={'#'}>Links Library</Link>
                         </div>
@@ -60,7 +60,7 @@ function Capture() {
 
                         <div className="flex flex-row items-center mt-1 hover:bg-gray-200 p-2 rounded-lg">
                             <MdOutlinePostAdd size={18} color="#394e6a" />
-                            <Link className="text-gray-500 ml-3 text-sm" to={'#'}>Post Engagement</Link>
+                            <Link className="text-gray-500 ml-3 text-sm" to={`/dashboard/engagements/${botId}`}>Post Engagements</Link>
                         </div>
 
                         <div className="flex flex-row items-center mt-1 hover:bg-gray-200 p-2 rounded-lg">

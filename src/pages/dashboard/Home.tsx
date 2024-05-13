@@ -18,6 +18,7 @@ function Home() {
             <div className="grid grid-cols-3 p-6">
                 {bots.map((bot) => (
                     <BotCard
+                        key={`bot-${bot?.id}`}
                         id={bot?.id}
                         avatar={bot?.avatar}
                         companyName={bot?.companyName}

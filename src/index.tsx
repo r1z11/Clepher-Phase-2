@@ -13,6 +13,7 @@ import Home from './pages/dashboard/Home';
 import Dash from './pages/dashboard/Dash';
 import ErrorPage from './pages/Error';
 import Capture from './pages/dashboard/Capture';
+import PostEngagements from './pages/dashboard/PostEngagements';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard/capture/:botId",
     element: <Capture />,
+  },
+  {
+    path: "/dashboard/engagements/:botId",
+    element: <PostEngagements />,
   },
 ]);
 

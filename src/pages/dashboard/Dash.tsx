@@ -22,7 +22,7 @@ function Dash() {
             {bot && <HeaderDash companyName={bot.companyName} />}
 
             <div className="flex h-full w-full flex-row">
-                <Sidebar botId={botId ? botId : '1'} />
+                <Sidebar botId={botId ? botId : '1'} page="dash" />
 
                 <div className="flex flex-col p-6 w-full h-full">
                     <div className="flex flex-row rounded-xl bg-white p-6 items-center justify-between">

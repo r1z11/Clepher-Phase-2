@@ -10,50 +10,51 @@ import { useNavigate } from "react-router-dom";
 
 interface Props {
     botId: string;
+    page: string;
 }
 
-export default function Sidebar({botId}: Props) {
+export default function Sidebar({botId, page}: Props) {
 
     const navigate = useNavigate();
 
     return (
         <div className="flex flex-col h-screen px-2 justify-start bg-white border border-right border-gray-300">
-            <button className="hover:bg-gray-200 rounded-lg p-3 mt-6 active:bg-cyan-950">
-                <AiOutlineDashboard size={21} color='#444' />
+            <button className={page == "dash" ? "bg-sky-950 rounded-lg p-3 mt-6 text-white" : "hover:bg-gray-200 rounded-lg p-3 mt-6"}>
+                <AiOutlineDashboard size={21} />
             </button>
 
             <button className="hover:bg-gray-200 rounded-lg p-3">
-                <FiUsers size={21} color='#444' />
+                <FiUsers size={21} />
             </button>
 
             <button className="hover:bg-gray-200 rounded-lg p-3">
-                <BsChatDots size={21} color='#444' />
+                <BsChatDots size={21} />
             </button>
 
             <button
-                className="hover:bg-gray-200 rounded-lg p-3"
-                onClick={() => navigate(`dashboard/capture/${botId}`)}>
-                <ImMagnet size={21} color='#666' />
+                className={ page == "capture" || page == "posts" ? "bg-sky-950 rounded-lg p-3 text-white" :"hover:bg-gray-200 rounded-lg p-3"}
+                onClick={() => navigate(`/dashboard/capture/${botId}`)}>
+                <ImMagnet size={21} />
             </button>
 
             <button className="hover:bg-gray-200 rounded-lg p-3">
-                <ImBullhorn size={21} color='#666' />
+                <ImBullhorn size={21} />
             </button>
 
             <button className="hover:bg-gray-200 rounded-lg p-3">
-                <ImMagicWand size={21} color='#666' />
+                <ImMagicWand size={21} />
             </button>
 
             <button className="hover:bg-gray-200 rounded-lg p-3">
-                <GoStack size={21} color='#666' />
+                <GoStack size={21} />
             </button>
 
             <button className="hover:bg-gray-200 rounded-lg p-3">
-                <VscGraphLine size={21} color='#666' />
+                <VscGraphLine size={21} />
             </button>
 
             <button className="hover:bg-gray-200 rounded-lg p-3">
-                <HiOutlineCog6Tooth size={21} color='#666' />
+                <HiOutlineCog6Tooth size={21} />
             </button>
         </div>
     )

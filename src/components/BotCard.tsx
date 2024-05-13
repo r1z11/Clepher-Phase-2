@@ -1,13 +1,39 @@
+
+import { useState } from "react";
+
 import { HiOutlineCog8Tooth } from "react-icons/hi2";
 
 import Instagram from "../assets/images/instagram.svg";
 import Messenger from "../assets/images/cm-messenger-icon-blurple.svg";
 import DropDownMenu from "./DropDownMenu";
-import { useState } from "react";
 import { Bot } from "../types";
+import { useNavigate } from "react-router-dom";
+
+
+// Drop down menu options
+const options = [
+    {
+        key: '1',
+        label: 'Dashboard',
+    },
+    {
+        key: '2',
+        label: 'Delete',
+    }
+]
 
 function BotCard({ id, avatar, companyName, category, totalSubscribers, activeSubscribers }: Bot) {
+
+    const navigate = useNavigate();
+
     const [isOpen, setIsOpen] = useState(false);
+
+    const action = (key: string) => {
+        console.log('action in bot card', key)
+        if(key == '1'){
+            navigate(`/dashboard/${id}`)
+        }
+    }
 
     return (
         <div key={id} className="bg-white p-10 m-3 rounded-xl">
@@ -24,7 +50,7 @@ function BotCard({ id, avatar, companyName, category, totalSubscribers, activeSu
                         <button onClick={() => setIsOpen(!isOpen)}>
                             <HiOutlineCog8Tooth size={19} color="#666" />
                         </button>
-                        {isOpen && <DropDownMenu botId={id} />}
+                        {isOpen && <DropDownMenu botId={id} options={options} width="w-30" action={() => action} />}
 
                         <div className="flex flex-row mt-2">
                             <img src={Instagram} width={16} />

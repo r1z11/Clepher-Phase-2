@@ -286,3 +286,29 @@ export const links = [
         link: 'http://radiant-orchid.org'
     },
 ]
+
+// Post Engagements
+export const postEngagements = [
+    {
+        id: 1,
+        icon: 'messenger',
+        name: 'Markets',
+        eu: {
+            engaged: 50,
+            unique: 25
+        },
+        acquired: 66,
+        conversion: '10%',
+    },
+    {
+        id: 2,
+        icon: 'instagram',
+        name: 'Accounts',
+        eu: {
+            engaged: 50,
+            unique: 25
+        },
+        acquired: 66,
+        conversion: '10%',
+    }
+]
