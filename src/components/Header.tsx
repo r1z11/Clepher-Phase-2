@@ -7,8 +7,8 @@ import { FaRegCircleUser } from "react-icons/fa6";
 
 export default function Header() {
     return (
-        <div className="w-full flex flex-row align-center py-3 px-6 bg-white justify-between">
-            <img src={logo} className="h-9 mt-3" />
+        <div className="w-full flex flex-row items-center py-3 px-6 bg-white justify-between">
+            <img src={logo} className="h-9" />
 
             <div>
                 <button className="mr-5 hover:bg-gray-300 rounded-full p-3">

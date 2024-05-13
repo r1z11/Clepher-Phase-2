@@ -1,6 +1,5 @@
 import './App.css';
 import SignIn from './pages/auth/SignIn';
-import Home from './pages/dashboard/Home';
 
 function App() {
   return (

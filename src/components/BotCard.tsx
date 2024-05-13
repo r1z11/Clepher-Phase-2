@@ -4,46 +4,27 @@ import Instagram from "../assets/images/instagram.svg";
 import Messenger from "../assets/images/cm-messenger-icon-blurple.svg";
 import DropDownMenu from "./DropDownMenu";
 import { useState } from "react";
+import { Bot } from "../types";
 
-interface BotProps {
-    avatar: string;
-    companyName: string;
-    category: string;
-    subscribers: number;
-    activeSubscribers: number;
-}
-
-// Drop down menu options
-const options = [
-    {
-        key: '1',
-        label: 'Dashboard',
-    },
-    {
-        key: '2',
-        label: 'Delete',
-    }
-]
-
-function BotCard({ avatar, companyName, category, subscribers, activeSubscribers }: BotProps) {
+function BotCard({ id, avatar, companyName, category, totalSubscribers, activeSubscribers }: Bot) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="bg-white p-10 m-3 rounded-xl">
-            <div className="flex flex-row align-center">
-                <img src={avatar} width={50} className="mr-2 rounded-full shadow-lg" />
+        <div key={id} className="bg-white p-10 m-3 rounded-xl">
+            <div className="flex flex-row items-center">
+                <img src={avatar} width={30} height={30} className="mr-3 rounded-full shadow-lg w-1/6" />
 
-                <div className="flex flex-row">
-                    <div className="flex-col text-left">
+                <div className="flex flex-row w-5/6">
+                    <div className="flex flex-col text-left w-3/4 mr-3">
                         <p className="text-md text-gray-500">{companyName}</p>
                         <p className="text-xs text-gray-500">{category}</p>
                     </div>
 
-                    <div className="flex-col">
+                    <div className="flex flex-col w-1/4 items-end">
                         <button onClick={() => setIsOpen(!isOpen)}>
                             <HiOutlineCog8Tooth size={19} color="#666" />
                         </button>
-                        {isOpen && <DropDownMenu options={options} />}
+                        {isOpen && <DropDownMenu botId={id} />}
 
                         <div className="flex flex-row mt-2">
                             <img src={Instagram} width={16} />
@@ -59,7 +40,7 @@ function BotCard({ avatar, companyName, category, subscribers, activeSubscribers
             <div className="flex flex-row mt-6">
                 <div className="flex-col mr-6 text-left w-1/2">
                     <p className="text-xs text-gray-500">Total subscribers</p>
-                    <p className="text-sm text-blue-500">{subscribers}</p>
+                    <p className="text-sm text-blue-500">{totalSubscribers}</p>
                 </div>
 
                 <div className="flex-col text-left w-1/2">

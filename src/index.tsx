@@ -10,11 +10,15 @@ import {
 import App from './App';
 import SignIn from './pages/auth/SignIn';
 import Home from './pages/dashboard/Home';
+import Dash from './pages/dashboard/Dash';
+import ErrorPage from './pages/Error';
+import Capture from './pages/dashboard/Capture';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/login",
@@ -23,6 +27,14 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Home />,
+  },
+  {
+    path: "/dashboard/:botId",
+    element: <Dash />,
+  },
+  {
+    path: "/dashboard/capture/:botId",
+    element: <Capture />,
   },
 ]);
 

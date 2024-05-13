@@ -1,5 +1,4 @@
-// Bots
-export const bots = [
+[
     {
         "id": 1,
         "avatar": "https://robohash.org/aquisquamaut.jpg?size=128x128&set=set1",
