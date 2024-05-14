@@ -15,6 +15,9 @@ import Sidebar from "../../components/Sidebar";
 import { bots, postEngagements } from '../../constants/Data';
 import { Bot } from '../../types';
 import DropDownMenu from '../../components/DropDownMenu';
+import Modal from '../../components/Modal';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { updatePostEngagements } from '../../store/reducers/Data';
 
 
 // Bulk actions dropdown menu options
@@ -49,21 +52,43 @@ function PostEngagements() {
     const [query, setQuery] = useState('');
     const [bulkActionOpen, setBulkActionOpen] = useState(false);
     const [postActionOpenItems, setPostActionOpenItems] = useState(new Array(postEngagements.length).fill(false));
+    const [allBoxes, setAllCheckBoxes] = useState(false);
     const [checkedItems, setCheckedItems] = useState(new Array(postEngagements.length).fill(false));
-    const [engagements, setEngagements] = useState<{ id: number; icon: string; name: string; eu: { engaged: number; unique: number; }; acquired: number; conversion: string; }[]>()
     const [index, setIndex] = useState(0);
+    const [modalShown, setModalShown] = useState(false);
+
+    const engagements = useAppSelector(state => state.data.postEngagements);
+
+    const dispatch = useAppDispatch();
 
     // Get bot details
     useEffect(() => {
         const _bot = bots.filter(item => item.id === Number(botId));
         setBot(_bot[0]);
-        // initialize post engagements
-        setEngagements(postEngagements);
+        dispatch(updatePostEngagements(postEngagements));
     }, []);
+
+    const checkAllBoxes = () => {
+        const updatedCheckedItems = [...checkedItems];
+
+        if (allBoxes === false) {
+            for (let i = 0; i < postEngagements.length; i++) {
+                updatedCheckedItems[i] = true;
+            }
+            setCheckedItems(updatedCheckedItems);
+            setAllCheckBoxes(true)
+        } else {
+            for (let i = 0; i < postEngagements.length; i++) {
+                updatedCheckedItems[i] = false;
+            }
+            setCheckedItems(updatedCheckedItems);
+            setAllCheckBoxes(false)
+        }
+    }
 
     // Handle toggling checkboxes
     const handleCheckbox = (index: number) => {
-        const updatedCheckedItems = [...checkedItems];
+        let updatedCheckedItems = [...checkedItems];
         updatedCheckedItems[index] = !checkedItems[index];
         setCheckedItems(updatedCheckedItems);
     }
@@ -80,14 +105,22 @@ function PostEngagements() {
 
     // Bulk delete post engagements
     const deleteEngagements = () => {
-        if (engagements) {
-            const items = [...engagements];
-            for (let i = 0; i < engagements.length; i++) {
+        if (engagements && engagements.length > 0) {
+            let items = [...engagements];
+
+            for (let i = 0; i < items.length; i++) {
                 if (checkedItems[i] === true) {
                     items.splice(i, 1);
                 }
             }
-            setEngagements(items);
+            dispatch(updatePostEngagements(items));
+
+            const updatedCheckedItems = [...checkedItems];
+            for (let i = 0; i < items.length; i++) {
+                updatedCheckedItems[i] = false;
+            }
+            setCheckedItems(updatedCheckedItems);
+            setAllCheckBoxes(false)
         }
     }
 
@@ -100,12 +133,30 @@ function PostEngagements() {
         // Rename post engagement
         if (engagements && key == '2') {
             // rename
+            setModalShown(true);
         }
         // Delete post engagement
         if (engagements && key == '3') {
             const items = [...engagements];
             items.splice(index, 1);
-            setEngagements(items);
+            dispatch(updatePostEngagements(items));
+        }
+    }
+
+    const renamePostEngagement = (value: string) => {
+
+        if (engagements && engagements.length > 0) {
+
+            const items = engagements.map(item => {
+                if ((item.id - 1) === index) {
+                    return { ...item, name: value };
+                } else {
+                    return item;
+                }
+            });
+
+            dispatch(updatePostEngagements(items));
+            setModalShown(false);
         }
     }
 
@@ -185,9 +236,16 @@ function PostEngagements() {
                                 <thead>
                                     <tr className="text-gray-500 text-left text-sm">
                                         {headers.map((header, index) => (
-                                            <th key={`header-${index}`} className="px-3 py-2 border-bottom border-gray-300">
-                                                {header}
-                                            </th>
+                                            <>
+                                                {index == 0 ?
+                                                    <th key={`header-${index}`} className="pl-4 py-2 border-bottom border-gray-300">
+                                                        <input key={`h-check-${index}`} type="checkbox" checked={allBoxes} onChange={(e) => checkAllBoxes()} className="border border-gray-300 rounded-full" />
+                                                    </th>
+                                                    :
+                                                    <th key={`header-${index}`} className="px-3 py-2 border-bottom border-gray-300">
+                                                        {header}
+                                                    </th>}
+                                            </>
                                         ))}
                                     </tr>
                                 </thead>
@@ -226,6 +284,9 @@ function PostEngagements() {
                     </div>
                 </div>
             </div>
+
+            {/* Rename post engagement dialog */}
+            {modalShown && <Modal isOpen={modalShown} onClose={() => setModalShown(false)} onAction={renamePostEngagement} />}
         </div>
     );
 }

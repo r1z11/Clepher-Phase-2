@@ -10,3 +10,16 @@ export type Bot = {
     activeSubscribers: number;
     unsubscribed?: number;
 }
+
+// Post Engagements
+export type PostEngagements = {
+    id: number;
+    icon: string;
+    name: string;
+    eu: {
+        engaged: number;
+        unique: number;
+    },
+    acquired: number;
+    conversion: string;
+}

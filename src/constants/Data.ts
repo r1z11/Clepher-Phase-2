@@ -291,8 +291,8 @@ export const links = [
 export const postEngagements = [
     {
         id: 1,
-        icon: 'messenger',
-        name: 'Markets',
+        icon: 'instagram',
+        name: 'Identity',
         eu: {
             engaged: 50,
             unique: 25
@@ -303,7 +303,95 @@ export const postEngagements = [
     {
         id: 2,
         icon: 'instagram',
-        name: 'Accounts',
+        name: 'Marketing',
+        eu: {
+            engaged: 50,
+            unique: 25
+        },
+        acquired: 66,
+        conversion: '10%',
+    },
+    {
+        id: 3,
+        icon: 'instagram',
+        name: 'Branding',
+        eu: {
+            engaged: 50,
+            unique: 25
+        },
+        acquired: 66,
+        conversion: '10%',
+    },
+    {
+        id: 4,
+        icon: 'instagram',
+        name: 'Operations',
+        eu: {
+            engaged: 50,
+            unique: 25
+        },
+        acquired: 66,
+        conversion: '10%',
+    },
+    {
+        id: 5,
+        icon: 'messenger',
+        name: 'Markets',
+        eu: {
+            engaged: 50,
+            unique: 25
+        },
+        acquired: 66,
+        conversion: '10%',
+    },
+    {
+        id: 6,
+        icon: 'instagram',
+        name: 'Configuration',
+        eu: {
+            engaged: 50,
+            unique: 25
+        },
+        acquired: 66,
+        conversion: '10%',
+    },
+    {
+        id: 7,
+        icon: 'messenger',
+        name: 'Intranet',
+        eu: {
+            engaged: 50,
+            unique: 25
+        },
+        acquired: 66,
+        conversion: '10%',
+    },
+    {
+        id: 8,
+        icon: 'instagram',
+        name: 'Integration',
+        eu: {
+            engaged: 50,
+            unique: 25
+        },
+        acquired: 66,
+        conversion: '10%',
+    },
+    {
+        id: 9,
+        icon: 'messenger',
+        name: 'Functionality',
+        eu: {
+            engaged: 50,
+            unique: 25
+        },
+        acquired: 66,
+        conversion: '10%',
+    },
+    {
+        id: 10,
+        icon: 'instagram',
+        name: 'Usability',
         eu: {
             engaged: 50,
             unique: 25
