@@ -2,6 +2,10 @@
 
 https://clepher-phase-2.onrender.com/
 
+# Screenshot
+
+![Alt text](/src/assets/images/screenshot.png?raw=true)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
